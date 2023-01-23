@@ -4,10 +4,13 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../App';
 import { useNavigation } from '@react-navigation/native';
 import HomeScreenNavButton from '../components/ui/home-screen-nav-btn';
+import { AuthContext } from '../stores/auth-context';
+import { useContext } from 'react';
 
 const HomeScreen = () => {
 
   const navigation = useNavigation();
+  const authContext = useContext(AuthContext);
 
   return (
     <View style={styles.container}>
@@ -36,6 +39,12 @@ const HomeScreen = () => {
         buttonText="Market"
         // @ts-ignore
         onClick={() => navigation.navigate("Market")}
+      />
+
+    <HomeScreenNavButton
+        buttonText="Log out"
+        // @ts-ignore
+        onClick={() => authContext.logout()}
       />
     </View>
   );
