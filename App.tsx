@@ -4,6 +4,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useContext, useEffect, useState } from 'react';
 import LoadingOverlay from './components/ui/loading-overlay';
 import { Colors } from './constants/global-styles';
+import PressingDetailsScreen from './screens/authenticated/pressing/pressing-details-screen';
+import PressingListScreen from './screens/authenticated/pressing/pressing-list-screen';
 import HomeScreen from './screens/home-screen';
 import PressingScreen from './screens/pressing-screen';
 import LoginScreen from './screens/unauthenticated/login-screen';
@@ -34,6 +36,26 @@ const VesselStackNavigator = () => {
       <VesselsStack.Screen
         name="VesselDetails"
         component={VesselDetailsScreen}
+      ></VesselsStack.Screen>
+    </VesselsStack.Navigator>
+  );
+};
+
+
+const PressingStack = createNativeStackNavigator();
+
+const PressingStackNavigator = () => {
+  return (
+    <VesselsStack.Navigator screenOptions={{
+      headerShown: false
+    }}>
+      <VesselsStack.Screen
+        name="Pressings"
+        component={PressingListScreen}
+      ></VesselsStack.Screen>
+      <VesselsStack.Screen
+        name="PressingDetails"
+        component={PressingDetailsScreen}
       ></VesselsStack.Screen>
     </VesselsStack.Navigator>
   );
@@ -104,7 +126,7 @@ const AuthStackNavigator = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="Pressing" component={PressingScreen} />
+      <Stack.Screen name="Pressing" component={PressingStackNavigator} />
       <Stack.Screen name="Vessels" component={VesselStackNavigator} />
     </Stack.Navigator>
   );
